@@ -1,1 +1,0 @@
-# fatih-python-workshop
