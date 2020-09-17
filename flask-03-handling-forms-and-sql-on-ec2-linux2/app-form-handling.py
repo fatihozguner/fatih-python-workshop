@@ -10,6 +10,10 @@ app = Flask(__name__)
 @app.route('/', methods=['GET'])
 def home():
     return render_template('index.html', name='Fatih')
+
+# Write a function named `greet` which uses template file named `greet.html` given under `templates` folder
+# and assign to the static route of ('/greet')
+
 @app.route('/greet', methods=['GET'])
 def greet():
     if 'user' in request.args:
@@ -17,6 +21,20 @@ def greet():
         return render_template('greet.html', user=usr)
     else:
         return render_template('greet.html', user='Send your user name with "user" parameter in query string')
+
+# Write a function named `login` which uses `GET` and `POST` methods,
+# and template files named `login.html` and `secure.html` given under `templates` folder
+# and assign to the static route of ('login')
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        user_name=request.form['username']
+        return render_template('secure.html', user=user_name)
+    else:
+        return render_template('login.html')
+
+# Add a statement to run the Flask application which can be reached from any host on port 80.
 
 if __name__ == '__main__':
     app.run(host='localhost', port=5000, debug=True)
